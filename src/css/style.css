@@ -1,0 +1,96 @@
+:root {
+  --primary: #e9e9e9;
+  --bg: #ffffff;
+}
+
+* {
+  font-family: "Montserrat";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+.body {
+  font-family: "Montserrat";
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-image: url(/src/img/hero.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.hero::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.hero .content {
+  padding: 1.4rem 7%;
+  max-width: 60rem;
+}
+
+.hero .content h1 {
+  font-size: 48px;
+  color: #ffffff;
+}
+
+.hero .content p {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.footer {
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+
+.footer p {
+  font-size: 14px;
+}
+
+.footer-column {
+  margin-top: 30px;
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+.logo-ilab {
+  width: 200px;
+  height: auto;
+
+  display: block;
+  margin-top: 35px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.social-logo {
+  width: 10px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.social-logo-large {
+  width: 20px;
+  height: auto;
+}
+
+.social-logo-large + p {
+  margin-left: 10px;
+}

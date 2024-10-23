@@ -1,0 +1,37 @@
+/* home.css */
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.big-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+.content {
+  width: 100%;
+}
+
+.content h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.content p {
+  flex: 3;
+  font-size: 16px;
+}
+
+.side-image {
+  flex: 1;
+  float: right;
+  width: 100px;
+  height: auto;
+  margin-left: 20px;
+}
