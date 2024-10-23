@@ -7,9 +7,9 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import db from "../firebaseConfig"; // Sesuaikan dengan konfigurasi Firebase Anda
-import "../css/crud.css"; // CSS halaman CRUD
-import Navbar from "./navbar"; // Import Navbar
+import db from "../firebaseConfig";
+import "../css/crud.css";
+import Navbar from "./navbar";
 
 const ProductCrud = () => {
   const [products, setProducts] = useState([]);
@@ -24,16 +24,15 @@ const ProductCrud = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      // Show prompt login when accessing the page
       const login = prompt("Enter username and password :");
       if (login === "admin") {
         setIsLoggedIn(true);
-        fetchProducts(); // Fetch products if logged in
+        fetchProducts();
       } else {
         setError("Invalid username or password");
       }
     } else {
-      fetchProducts(); // Fetch products only if logged in
+      fetchProducts();
     }
   }, [isLoggedIn]);
 
@@ -53,13 +52,13 @@ const ProductCrud = () => {
     e.preventDefault();
     await addDoc(collection(db, "products"), newProduct);
     setNewProduct({ description: "", image: "" });
-    fetchProducts(); // Refresh product list
+    fetchProducts();
   };
 
   // Delete product
   const handleDeleteProduct = async (id) => {
     await deleteDoc(doc(db, "products", id));
-    fetchProducts(); // Refresh product list
+    fetchProducts();
   };
 
   // Edit product
@@ -75,7 +74,7 @@ const ProductCrud = () => {
     await updateDoc(productDoc, editProduct);
     setEditProductId(null);
     setEditProduct({ description: "", image: "" });
-    fetchProducts(); // Refresh product list
+    fetchProducts();
   };
 
   return (

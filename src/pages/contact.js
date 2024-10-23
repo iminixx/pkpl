@@ -1,52 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { collection, addDoc } from "firebase/firestore"; // Impor Firestore
-import { getAuth } from "firebase/auth"; // Impor getAuth dari Firebase
-import db from "../firebaseConfig"; // Sesuaikan dengan konfigurasi Firebase Anda
+import { collection, addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import db from "../firebaseConfig";
 import "../css/contact.css";
 
 const UserFeedback = () => {
-  const [username, setUsername] = useState(""); // State untuk username
-  const [feedback, setFeedback] = useState(""); // State untuk feedback
-  const [rating, setRating] = useState(1); // State untuk rating
-  const [email, setEmail] = useState(""); // State untuk email
-  const [isEmailChecked, setIsEmailChecked] = useState(false); // State untuk checkbox
-  const [loggedInEmail, setLoggedInEmail] = useState(""); // State untuk email pengguna
+  const [username, setUsername] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [rating, setRating] = useState(1);
+  const [email, setEmail] = useState("");
+  const [isEmailChecked, setIsEmailChecked] = useState(false);
+  const [loggedInEmail, setLoggedInEmail] = useState("");
 
   useEffect(() => {
-    const auth = getAuth(); // Mengambil instance auth
-    const user = auth.currentUser; // Mendapatkan pengguna yang sedang login
+    const auth = getAuth();
+    const user = auth.currentUser;
 
     if (user) {
-      setLoggedInEmail(user.email || ""); // Set email pengguna yang login
+      setLoggedInEmail(user.email || "");
     }
   }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Mencegah reload halaman saat submit
+    e.preventDefault();
 
-    // Jika checkbox dicentang, gunakan email yang terdaftar
     const finalEmail = isEmailChecked ? loggedInEmail : email;
 
     try {
-      // Menambahkan dokumen baru ke koleksi userFeedback
       await addDoc(collection(db, "userFeedback"), {
         username,
         feedback,
         rating,
-        email: finalEmail, // Menggunakan email yang sesuai
+        email: finalEmail,
       });
 
-      alert("Feedback submitted successfully!"); // Notifikasi sukses
+      alert("Feedback submitted successfully!");
 
-      // Reset state setelah pengiriman berhasil
       setUsername("");
       setFeedback("");
       setRating(1);
       setEmail("");
       setIsEmailChecked(false);
     } catch (error) {
-      console.error("Error adding document: ", error); // Menampilkan kesalahan di console
-      alert("Error submitting feedback. Please try again."); // Notifikasi kesalahan
+      console.error("Error adding document: ", error);
+      alert("Error submitting feedback. Please try again.");
     }
   };
 
@@ -82,14 +79,14 @@ const UserFeedback = () => {
         <input
           type="email"
           placeholder="Email"
-          value={isEmailChecked ? loggedInEmail : email} // Gunakan email saat checkbox dicentang
+          value={isEmailChecked ? loggedInEmail : email}
           onChange={(e) => {
             if (!isEmailChecked) {
               setEmail(e.target.value);
             }
           }}
           required
-          disabled={isEmailChecked} // Disable input jika checkbox dicentang
+          disabled={isEmailChecked}
         />
         <label>
           <input
@@ -98,9 +95,9 @@ const UserFeedback = () => {
             onChange={(e) => {
               setIsEmailChecked(e.target.checked);
               if (e.target.checked) {
-                setEmail(loggedInEmail); // Set email ke email yang login jika dicentang
+                setEmail(loggedInEmail);
               } else {
-                setEmail(""); // Kosongkan email jika tidak dicentang
+                setEmail("");
               }
             }}
           />
